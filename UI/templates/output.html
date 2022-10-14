@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv='cache-control' content='no-cache'>
+  <meta http-equiv='expires' content='0'>
+  <meta http-equiv='pragma' content='no-cache'>
+  <title>Output</title>
+  <link rel="stylesheet" href={{ url_for('static', filename="output.css" ) }}>
+  <link rel="stylesheet" href={{ url_for('static', filename="lightbox.min.css" ) }}>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
+  <script src={{ url_for('static', filename="output.js" ) }}></script>
+  <script src={{ url_for('static', filename="lightbox-plus-jquery.min.js" ) }}></script>
+</head>
+
+<body>
+  <h2>Weapon Detection</h2>
+  <div id="wrapper">
+    <video id="home2" class="outputVideoPlayer" controls="controls" autoplay muted>
+      <source src={{ url_for('static', filename="op.mp4" ) }} type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+    <div class="clear"></div>
+  </div>
+
+  <div class="tabs">
+
+    <input type="radio" id="tab1" name="tab-control" checked>
+    <input type="radio" id="tab2" name="tab-control">
+    <ul>
+      <li title="Details"><label for="tab1" role="button"><svg viewBox="0 2 24 26">
+            <path
+              d="M11,9H13V7H11M12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4C16.41,4 20,7.59 20,12C20,16.41 16.41,20 12,20M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M11,17H13V11H11V17Z" />
+          </svg><br><span>Details</span></label></li>
+      <li title="Frames"><label for="tab2" role="button"><svg style="width:24px;height:24px;vertical-align:middle"
+            viewBox="0 0 24 24">
+            <path fill="currentColor"
+              d="M22,16V4A2,2 0 0,0 20,2H8A2,2 0 0,0 6,4V16A2,2 0 0,0 8,18H20A2,2 0 0,0 22,16M11,12L13.03,14.71L16,11L20,16H8M2,6V20A2,2 0 0,0 4,22H18V20H4V6" />
+          </svg><br><span>Frames</span></label></li>
+    </ul>
+
+    <div class="slider">
+      <div class="indicator"></div>
+    </div>
+    <div class="content">
+      <section class="details">
+        <b style="font-size: 20px">Severity : </b><span id="severityRating"></span>
+
+        <b>Small guns:</b> {{details["Small guns"]}}
+
+        <b>Big guns:</b> {{details["Big guns"]}}
+
+        <b>Wielded small guns:</b> {{details["Wielded small guns"]}}
+
+        <b>Wielded big guns:</b> {{details["Wielded big guns"]}}
+        <span id="dots"></span><span id="more">
+        <b>Number of frames with unwielded small guns:</b> {{details["Number of frames with unwielded small guns"]}}
+        <progress id="p1" max="100" value="{{details['Percentage of frames with unwielded small guns']}}"
+          data-label="{{details['Percentage of frames with unwielded small guns']}}">{{details['Percentage of frames with wielded small guns']}}</progress>
+        <b>Number of frames with unwielded big guns:</b> {{details["Number of frames with unwielded big guns"]}}
+        <progress id="p2" max="100" value="{{details['Percentage of frames with unwielded big guns']}}"
+          data-label="{{details['Percentage of frames with unwielded big guns']}}"> {{details['Percentage of frames with unwielded big guns']}} </progress>
+        <b>Number of frames with wielded small guns:</b> {{details["Number of frames with wielded small guns"]}}
+        <progress id="p3" max="100" value="{{details['Percentage of frames with wielded small guns']}}"
+          data-label="{{details['Percentage of frames with wielded small guns']}}">{{details['Percentage of frames with wielded small guns']}}</progress>
+        <b>Number of frames with wielded big guns:</b> {{details["Number of frames with wielded big guns"]}}
+        <progress id="p4" max="100" value="{{details['Percentage of frames with wielded big guns']}}"
+          data-label="{{details['Percentage of frames with wielded big guns']}}">{{details['Percentage of frames with wielded big guns']}}</progress>
+        </span>
+        <button style="margin-left: 0;" onclick="myFunction()" id="myBtn">Read more <span><i
+              class="fas fa-angle-down"></i></span></button>
+      </section>
+
+      <section>
+        <h5 style="padding-left: 1.75vw">High Severity</h5>
+        <div class="gallery">          
+          {% if filenames1 %}
+          {% for filename in filenames1 %}
+          <a href="{{ url_for('static', filename=filename) }}" data-lightbox="myGallery"><img
+              src="{{ url_for('static', filename=filename) }}" alt="" /></a>
+          {% endfor %}
+          {% endif %}
+        </div>
+        <h5 style="padding-left: 1.75vw">Medium Severity</h5>
+        <div class="gallery">
+          {% if filenames2 %}
+          {% for filename in filenames2 %}
+          <a href="{{ url_for('static', filename=filename) }}" data-lightbox="myGallery"><img
+              src="{{ url_for('static', filename=filename) }}" alt="" /></a>
+          {% endfor %}
+          {% endif %}
+        </div>
+      </section>
+    </div>
+  </div>
+
+</body>
+
+</html>

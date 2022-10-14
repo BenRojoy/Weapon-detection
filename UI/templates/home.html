@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv='cache-control' content='no-cache'>
+<meta http-equiv='expires' content='0'>
+<meta http-equiv='pragma' content='no-cache'>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <link rel="stylesheet" href={{ url_for('static', filename="home.css" ) }}>
+  <script src={{ url_for('static', filename="script.js" ) }}></script>
+  <title>Document</title>
+</head>
+
+<body>
+  <div>
+    <h2>Weapon Detection</h2>
+
+    <!--file upload start-->
+    <form id="upload-file" method="post" enctype="multipart/form-data">
+      <div class="file-drop-area"> <span class="choose-file-button">Choose file</span> <span class="file-message"
+          id="file_name">or drag and drop files here</span> <input class="file-input" name="file" type="file">
+      </div>
+      <div>
+        <button class="upload-file-btn" id="upload-file-btn" type="button">Upload</button>
+      </div>
+      <div class="preview" id="preview">
+      </div>
+    </form>
+    <!--file upload end-->
+
+    
+    <div class="twoToneCenter">
+      <button class="twoToneButton" id="detect">Detect</button>
+    </div>
+  </div>
+</body>
+
+</html>
